@@ -7,7 +7,9 @@ public class Organization {
 	@Id
 	private String id;
 	private String name;
-	private boolean sharable;
+	private String readPolicy;
+	private String updatePolicy;
+	private String deletePolicy;
 	private boolean shareAllowed;
 
 	public String getName() {
@@ -18,14 +20,6 @@ public class Organization {
 		this.name = name;
 	}
 
-	public boolean isSharable() {
-		return sharable;
-	}
-
-	public void setSharable(boolean sharable) {
-		this.sharable = sharable;
-	}
-
 	public boolean isShareAllowed() {
 		return shareAllowed;
 	}
@@ -34,17 +28,51 @@ public class Organization {
 		this.shareAllowed = shareAllowed;
 	}
 
-	public Organization(String id, String name, boolean sharable, boolean shareAllowed) {
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getReadPolicy() {
+		return readPolicy;
+	}
+
+	public void setReadPolicy(String readPolicy) {
+		this.readPolicy = readPolicy;
+	}
+
+	public String getUpdatePolicy() {
+		return updatePolicy;
+	}
+
+	public void setUpdatePolicy(String updatePolicy) {
+		this.updatePolicy = updatePolicy;
+	}
+
+	public String getDeletePolicy() {
+		return deletePolicy;
+	}
+
+	public void setDeletePolicy(String deletePolicy) {
+		this.deletePolicy = deletePolicy;
+	}
+
+	public Organization(String id, String name, String readPolicy, String updatePolicy, String deletePolicy,
+			boolean shareAllowed) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.sharable = sharable;
+		this.readPolicy = readPolicy;
+		this.updatePolicy = updatePolicy;
+		this.deletePolicy = deletePolicy;
 		this.shareAllowed = shareAllowed;
 	}
 	
-	public boolean IsSharingAllowed()
-	{
-		return sharable && shareAllowed;
+	public Organization() {
+		
 	}
 	
 }

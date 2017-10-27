@@ -1,5 +1,7 @@
 package organization.model;
 
+import java.util.Set;
+
 import org.springframework.data.annotation.Id;
 
 public class Employee {
@@ -9,7 +11,7 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private String organization;
-	private int internalAccessLevel;
+	private Set<String> allowedOperations;
 	
 	public String getId() {
 		return id;
@@ -17,14 +19,6 @@ public class Employee {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public int getInternalAccessLevel() {
-		return internalAccessLevel;
-	}
-
-	public void setInternalAccessLevel(int internalAccessLevel) {
-		this.internalAccessLevel = internalAccessLevel;
 	}
 
 	public String getFirstName() {
@@ -50,15 +44,22 @@ public class Employee {
 	public void setOrganization(String organization) {
 		this.organization = organization;
 	}
+	
+	public Set<String> getAllowedOperations() {
+		return allowedOperations;
+	}
 
-	public Employee(String id, String firstName, String lastName, String organization,
-			int internalAccessLevel) {
+	public void setAllowedOperations(Set<String> allowedOperations) {
+		this.allowedOperations = allowedOperations;
+	}
+
+	public Employee(String id, String firstName, String lastName, String organization, Set<String> allowedOperations) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.organization = organization;
-		this.internalAccessLevel = internalAccessLevel;
+		this.allowedOperations = allowedOperations;
 	}
 
 	public Employee() {

@@ -10,7 +10,6 @@ public class Product {
 	private int quantity;
 	private Double price;
 	private String organization;
-	private int accessLevel;
 	
 	public String getId() {
 		return id;
@@ -52,26 +51,17 @@ public class Product {
 		this.organization = organization;
 	}
 	
-	public int getAccessLevel() {
-		return accessLevel;
-	}
-
-	public void setAccessLevel(int accessLevel) {
-		this.accessLevel = accessLevel;
-	}
-	
 	public Product() {
 		
 	}
 
-	public Product(String id,String name, int quantity, Double price, String organization, int accessLevel) {
+	public Product(String id,String name, int quantity, Double price, String organization) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.quantity = quantity;
 		this.price = price;
 		this.organization = organization;
-		this.accessLevel = accessLevel;
 	}
 	
 	

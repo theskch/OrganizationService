@@ -1,11 +1,21 @@
 package organization;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+
+import organization.model.Employee;
+import organization.model.EmployeeRepository;
+import organization.model.Organization;
+import organization.model.OrganizationRepository;
+import organization.model.Product;
+import organization.model.ProductRepository;
+
 
 @ComponentScan
 @SpringBootApplication
@@ -13,6 +23,36 @@ public class OrganizationServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OrganizationServiceApplication.class, args);
+	}
+	
+	@Bean
+	CommandLineRunner init(
+			OrganizationRepository organizationRepository,
+			ProductRepository productRepository) {
+		return (evt) -> {
+			/*Organization organization = new Organization("C", "C", "false", "false", "false", false);
+			organizationRepository.save(organization);*/
+			
+			
+			Product product = new Product("elektromotor", "Elektromotor", 5, 550.0, "B");
+			Product product1 = new Product("energetskikabel", "Energetski kabel", 8, 100.0, "B");
+			Product product2 = new Product("osigurac", "Osigurac", 120, 20.0, "B");
+			Product product3 = new Product("kuciste", "Kuciste", 20, 200.0, "B");
+			Product product4 = new Product("vesmasina", "Ves Masina", 5, 2000.0, "C");
+			Product product5 = new Product("bojler", "Bojler", 4, 500.0, "C");
+			Product product6 = new Product("sporet", "Sporet", 2, 1200.0, "C");
+			Product product7 = new Product("sudomasina", "Sudo masina", 7, 800.0, "C");
+			
+			productRepository.save(product);
+			productRepository.save(product1);
+			productRepository.save(product2);
+			productRepository.save(product3);
+			productRepository.save(product4);
+			productRepository.save(product5);
+			productRepository.save(product6);
+			productRepository.save(product7);
+			
+		};
 	}
 	
 	/*@Bean
