@@ -1,6 +1,7 @@
 package organization.service;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,47 +20,29 @@ public class ProductServiceImpl implements ProductService {
 		this.productRepository = productRepository;
 	}
 	
+	@Override
 	public Collection<Product> getProductsOfOrganization(String organizationId){
 		return productRepository.findByOrganization(organizationId);
 	}
 
-
+	@Override
 	public Product getProductById(String productId) {
-		return productRepository.findById(productId).orElse(null);
+		return productRepository.findById(productId).orElseThrow(
+				() -> new ItemNotFoundException(productId));
 	}
 
-
-	public void updateProduct(Product updatedProduct) {
-		Product product = productRepository.findById(updatedProduct.getId()).orElseThrow(
-				() -> new ItemNotFoundException(updatedProduct.getId()));
-		
-		product.setName(updatedProduct.getName());
-		product.setQuantity(updatedProduct.getQuantity());
-		product.setPrice(updatedProduct.getPrice());
-		productRepository.save(product);
-	}
-	
+	@Override
 	public void addProduct(Product product) {
 		productRepository.save(product);
 	}
 	
-	public void deleteProduct(Product product) {
-		productRepository.delete(product);
+	@Override
+	public Boolean deleteProduct(String productId) {
+		return productRepository.deleteById(productId) > 0;
 	}
 
-	public Collection<Product> getProductsWithPriceGreaterThen(int condition, String organizationId) {
-		return productRepository.priceGreaterThen(condition, organizationId);
-	}
-
-	public Collection<Product> getProductsWithPriceLowerThen(int condition, String organizationId) {
-		return productRepository.priceLowerThen(condition, organizationId);
-	}
-
-	public Collection<Product> getProductsWithQuantityGreaterThen(int condition, String organizationId) {
-		return productRepository.quantityGreaterThen(condition, organizationId);
-	}
-
-	public Collection<Product> getProductsWithQuantityLowerThen(int condition, String organizationId) {
-		return productRepository.quantityLowerThen(condition, organizationId);
+	@Override
+	public Boolean updateProduct(String productId, Map<String, Object> values) {
+		return productRepository.updateProduct(productId, values);
 	}
 }

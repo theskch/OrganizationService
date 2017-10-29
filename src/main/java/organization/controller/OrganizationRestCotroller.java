@@ -2,7 +2,6 @@ package organization.controller;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +14,9 @@ import organization.service.OrganizationService;
 @RestController
 @RequestMapping("organization")
 public class OrganizationRestCotroller {
-		
+	
 	private final OrganizationService organizationService;
 	
-	@Autowired
 	OrganizationRestCotroller(OrganizationService organizationService){
 		this.organizationService = organizationService;
 	}
@@ -35,7 +33,7 @@ public class OrganizationRestCotroller {
 		organizationService.setAccessPolicyForOperation(organizationId, policy, json.get("newValue"));
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, value = "/organizationId")
+	@RequestMapping(method = RequestMethod.PUT, value = "/{organizationId}")
 	void changeSharePolicy(@PathVariable String organizationId,
 			@RequestBody Map<String, Boolean> json) {
 		organizationService.changeSharePolicy(organizationId, json.get("newValue"));

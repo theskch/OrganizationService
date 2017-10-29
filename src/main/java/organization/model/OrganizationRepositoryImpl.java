@@ -14,17 +14,28 @@ public class OrganizationRepositoryImpl implements OrganizationRepositoryCustom{
 	@Override
 	public String getOrganizationOperationPolicy(String organizationId, String operation) {
 		Query query = new Query(Criteria.where("id").is(organizationId));
-		query.fields().include(operation);
+		query.fields().include(operation + "Policy");
 		Organization org = mongoTemplate.findOne(query, Organization.class);
-		if(org != null)
-			return org.getReadPolicy();
-		else return "failed";
+		if(org != null) {
+			switch(operation) {
+				case "read":
+					return org.getReadPolicy();
+				case "update":
+					return org.getUpdatePolicy();
+				case "delete":
+					return org.getDeletePolicy();
+				default:
+					return "false";
+			}
+		}
+		else 
+			return "false";
 	}
 
 	@Override
 	public void updateOrganizationOperationPolicy(String organizationId, String operation, String value) {
 		Query query = new Query(Criteria.where("id").is(organizationId));
-		mongoTemplate.updateFirst(query, Update.update(operation, value), Organization.class);
+		mongoTemplate.updateFirst(query, Update.update(operation + "Policy", value), Organization.class);
 	}
 
 	@Override

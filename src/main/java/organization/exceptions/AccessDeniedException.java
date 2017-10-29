@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.FORBIDDEN)
 public class AccessDeniedException extends RuntimeException{
 	
-	public AccessDeniedException(String employeeId, int accessLevelNeeded, int accessLevel) {
-		super("Access denied for user " + employeeId + "."
-				+ " Access level " + accessLevelNeeded + " or above needed, but was " + accessLevel);
+	public AccessDeniedException(String employeeId, String reason) {
+		super("Access denied for user " + employeeId + ". " + reason);
 	}
 }

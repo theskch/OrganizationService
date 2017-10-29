@@ -20,7 +20,7 @@ public class OrganizationServiceImpl implements OrganizationService{
 	
 	@Override
 	public boolean isShareAllowedForOrganization(String organizationId) {
-		return organizationRepository.isShareAllowed(organizationId) > 0;
+		return organizationRepository.isShareAllowed(organizationId);
 	}
 
 	@Override
