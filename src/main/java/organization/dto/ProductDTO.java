@@ -1,16 +1,14 @@
 package organization.dto;
 
 import java.util.Set;
+import organization.Operation;
 
 public class ProductDTO {
 
-	private String name;
-	
-	private int quantity;
-	
-	private Double price;
-	
-	private Set<String> allowedOperations;
+	private String name;	
+	private int quantity;	
+	private Double price;	
+	private Set<Operation> allowedOperations;
 
 	public String getName() {
 		return name;
@@ -36,15 +34,15 @@ public class ProductDTO {
 		this.price = price;
 	}
 
-	public Set<String> getAllowedOperations() {
+	public Set<Operation> getAllowedOperations() {
 		return allowedOperations;
 	}
 
-	public void setAllowedOperations(Set<String> allowedOperations) {
+	public void setAllowedOperations(Set<Operation> allowedOperations) {
 		this.allowedOperations = allowedOperations;
 	}
 
-	public ProductDTO(String name, int quantity, Double price, Set<String> allowedOperations) {
+	public ProductDTO(String name, int quantity, Double price, Set<Operation> allowedOperations) {
 		super();
 		this.name = name;
 		this.quantity = quantity;

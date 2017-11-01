@@ -1,10 +1,12 @@
 package organization.model;
 
+import organization.Operation;
+
 public interface OrganizationRepositoryCustom {
 
-	String getOrganizationOperationPolicy(String organizationId, String operation);
+	String getOrganizationOperationPolicy(String organizationId, Operation operation);
 	
-	void updateOrganizationOperationPolicy(String organizationId, String operation, String value);
+	boolean updateOrganizationOperationPolicy(String organizationId, Operation operation, String value);
 	
-	void changeSharePolicy(String organizationId, boolean newValue);
+	boolean changeSharePolicy(String organizationId, boolean newValue);
 }

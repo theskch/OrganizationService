@@ -1,8 +1,8 @@
 package organization.model;
 
 import java.util.Set;
-
 import org.springframework.data.annotation.Id;
+import organization.Operation;
 
 public class Employee {
 
@@ -11,7 +11,7 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private String organization;
-	private Set<String> allowedOperations;
+	private Set<Operation> allowedOperations;
 	
 	public String getId() {
 		return id;
@@ -45,15 +45,15 @@ public class Employee {
 		this.organization = organization;
 	}
 	
-	public Set<String> getAllowedOperations() {
+	public Set<Operation> getAllowedOperations() {
 		return allowedOperations;
 	}
 
-	public void setAllowedOperations(Set<String> allowedOperations) {
+	public void setAllowedOperations(Set<Operation> allowedOperations) {
 		this.allowedOperations = allowedOperations;
 	}
 
-	public Employee(String id, String firstName, String lastName, String organization, Set<String> allowedOperations) {
+	public Employee(String id, String firstName, String lastName, String organization, Set<Operation> allowedOperations) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
