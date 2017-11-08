@@ -1,5 +1,7 @@
 package organization.model;
 
+import java.util.Map;
+
 import organization.Operation;
 
 public interface OrganizationRepositoryCustom {
@@ -8,5 +10,5 @@ public interface OrganizationRepositoryCustom {
 	
 	boolean updateOrganizationOperationPolicy(String organizationId, Operation operation, String value);
 	
-	boolean changeSharePolicy(String organizationId, boolean newValue);
+	boolean updateSharePolicy(String organizationId, Map<String, String> values);
 }

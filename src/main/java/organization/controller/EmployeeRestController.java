@@ -39,7 +39,7 @@ public class EmployeeRestController {
 		return employeeService.getProductsForEmployee(employeeId);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/{employeeId}/{productId}")
+	@RequestMapping(method = RequestMethod.GET, value = "/{employeeId}/products/{productId}")
 	ProductDTO readProduct(@PathVariable String employeeId, @PathVariable String productId){
 		return employeeService.getProductForEmployee(employeeId, productId);
 	}
@@ -49,12 +49,12 @@ public class EmployeeRestController {
 		return employeeService.addProductByEmployee(employeeId, newProduct);
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE, value = "/{employeeId}/{productId}")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/{employeeId}/products/{productId}")
 	Boolean deleteProduct(@PathVariable String employeeId, @PathVariable String productId) {
 		return employeeService.deleteProductByEmployee(employeeId, productId);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, value = "/{employeeId}/{productId}")
+	@RequestMapping(method = RequestMethod.PUT, value = "/{employeeId}/products/{productId}")
 	Boolean updateProduct(@PathVariable String employeeId, @PathVariable String productId, @RequestBody Map<String, Object> values) {
 		return employeeService.updateProductByEmployee(employeeId, productId, values);
 	}

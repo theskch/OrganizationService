@@ -1,6 +1,7 @@
 package organization;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -131,8 +132,8 @@ public class OrganizationServiceApplication {
 			productRepository.save(product7);
 			productRepository.save(product8);
 			
-			Organization organizationB = new Organization("orgB", "B", "quantity > 0", "quantity > 10", "quantity > 10", false);
-			Organization organizationC = new Organization("orgC", "C", "false", "false", "false", false);
+			Organization organizationB = new Organization("orgB", "B", "quantity > 0", "quantity > 10", "quantity > 10", new HashSet<String>(){{ add("orgC");}});
+			Organization organizationC = new Organization("orgC", "C", "false", "false", "false", new HashSet<String>());
 			
 			organizationRepository.save(organizationB);
 			organizationRepository.save(organizationC);

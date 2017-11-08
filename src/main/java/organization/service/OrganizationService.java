@@ -1,6 +1,7 @@
 package organization.service;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,8 @@ public class OrganizationService{
 		this.organizationRepository = organizationRepository;
 	}
 	
-	public boolean isShareAllowedForOrganization(String organizationId) {
-		return organizationRepository.isShareAllowed(organizationId);
+	public boolean isShareAllowedForOrganization(String organizationId, String requestingOrganization) {
+		return organizationRepository.isShareAllowed(organizationId, requestingOrganization);
 	}
 
 	public String getAccessPolicyForOperation(String organizationId, Operation operation) {
@@ -31,8 +32,8 @@ public class OrganizationService{
 		return organizationRepository.updateOrganizationOperationPolicy(organizationId, operation, value);	
 	}
 
-	public boolean changeSharePolicy(String organizationId, boolean newValue) {
-		return organizationRepository.changeSharePolicy(organizationId, newValue);
+	public boolean updateSharePolicy(String organizationId, Map<String, String> values) {
+		return organizationRepository.updateSharePolicy(organizationId, values);
 	}
 
 	public Collection<Organization> findAllExcept(String organizationId) {

@@ -1,5 +1,7 @@
 package organization.model;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -41,9 +43,18 @@ public class OrganizationRepositoryImpl implements OrganizationRepositoryCustom{
 	}
 
 	@Override
-	public boolean changeSharePolicy(String organizationId, boolean newValue) {
+	public boolean updateSharePolicy(String organizationId, Map<String, String> values) {
 		Query query = new Query(Criteria.where("id").is(organizationId));
-		return mongoTemplate.updateFirst(query, Update.update("shareAllowed", newValue), Organization.class).isUpdateOfExisting();
+		Update update = new Update();
+		if(values.containsKey("add")){
+			update.addToSet("shareAllowedWith" ,values.get("add").toString());
+		}
+		
+		if(values.containsKey("remove")){
+			update.pull("shareAllowedWith" ,values.get("remove").toString());
+		}
+		
+		return mongoTemplate.updateFirst(query, update, Organization.class).isUpdateOfExisting();
 	}
 	
 	

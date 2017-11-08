@@ -1,5 +1,7 @@
 package organization.model;
 
+import java.util.Set;
+
 import org.springframework.data.annotation.Id;
 
 public class Organization {
@@ -10,7 +12,7 @@ public class Organization {
 	private String readPolicy;
 	private String updatePolicy;
 	private String deletePolicy;
-	private boolean shareAllowed;
+	private Set<String> shareAllowedWith;
 
 	public String getName() {
 		return name;
@@ -20,12 +22,12 @@ public class Organization {
 		this.name = name;
 	}
 
-	public boolean isShareAllowed() {
-		return shareAllowed;
+	public Set<String> getShareAllowedWith() {
+		return shareAllowedWith;
 	}
 
-	public void setShareAllowed(boolean shareAllowed) {
-		this.shareAllowed = shareAllowed;
+	public void setShareAllowedWith(Set<String> shareAllowedWith) {
+		this.shareAllowedWith = shareAllowedWith;
 	}
 
 	public String getId() {
@@ -61,14 +63,14 @@ public class Organization {
 	}
 
 	public Organization(String id, String name, String readPolicy, String updatePolicy, String deletePolicy,
-			boolean shareAllowed) {
+			Set<String> shareAllowedWith) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.readPolicy = readPolicy;
 		this.updatePolicy = updatePolicy;
 		this.deletePolicy = deletePolicy;
-		this.shareAllowed = shareAllowed;
+		this.shareAllowedWith = shareAllowedWith;
 	}
 	
 	public Organization() {

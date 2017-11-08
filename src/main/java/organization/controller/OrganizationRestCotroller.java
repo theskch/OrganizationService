@@ -36,8 +36,8 @@ public class OrganizationRestCotroller {
 	
 	@RequestMapping(method = RequestMethod.PUT, value = "/{organizationId}")
 	boolean changeSharePolicy(@PathVariable String organizationId,
-			@RequestBody Map<String, Boolean> json) {
-		return organizationService.changeSharePolicy(organizationId, json.get("newValue"));
+			@RequestBody Map<String, String> json) {
+		return organizationService.updateSharePolicy(organizationId, json);
 	}
 	
 }

@@ -77,7 +77,7 @@ public class EmployeeService{
 		});
 		
 		organizationService.findAllExcept(employee.getOrganization()).forEach(organization -> {
-			if(organization.isShareAllowed()) {
+			if(organization.getShareAllowedWith().contains(employee.getOrganization())) {
 				
 				productService.getProductsOfOrganization(organization.getId()).forEach(product -> {
 					if(checkPolicy(product,organization.getReadPolicy())){
@@ -117,7 +117,7 @@ public class EmployeeService{
 		
 		Product product = productService.getProductById(productId);
 		
-		if(product.getOrganization() == employee.getOrganization()) {
+		if(product.getOrganization().equals(employee.getOrganization())) {
 			employee.getAllowedOperations().remove(Operation.CREATE);
 			return new ProductDTO(
 					product.getName(), 
@@ -125,7 +125,7 @@ public class EmployeeService{
 					product.getPrice(), 
 					employee.getAllowedOperations());
 		}
-		else if(organizationService.isShareAllowedForOrganization(product.getOrganization())){
+		else if(organizationService.isShareAllowedForOrganization(product.getOrganization(), employee.getOrganization())){
 			
 			if(checkPolicy(product, organizationService.getAccessPolicyForOperation(product.getOrganization(), Operation.READ))) {
 				Set<Operation> operations = new HashSet<Operation>();
@@ -178,11 +178,11 @@ public class EmployeeService{
 		}
 		
 		Product product = productService.getProductById(productId);
-		if(product.getOrganization() == employee.getOrganization()) {
+		if(product.getOrganization().equals(employee.getOrganization())) {
 			productService.deleteProduct(productId);
 			return true;
 		}
-		else if(organizationService.isShareAllowedForOrganization(product.getOrganization())){
+		else if(organizationService.isShareAllowedForOrganization(product.getOrganization(), employee.getOrganization())){
 			if(checkPolicy(product, organizationService.getAccessPolicyForOperation(product.getOrganization(), Operation.DELETE))) {
 				productService.deleteProduct(productId);
 				return true;
@@ -205,10 +205,10 @@ public class EmployeeService{
 		}
 	
 		Product product = productService.getProductById(productId);
-		if(product.getOrganization() == employee.getOrganization()) {
+		if(product.getOrganization().equals(employee.getOrganization())) {
 			return productService.updateProduct(productId, values);
 		}
-		else if(organizationService.isShareAllowedForOrganization(product.getOrganization())){
+		else if(organizationService.isShareAllowedForOrganization(product.getOrganization(), employee.getOrganization())){
 			if(checkPolicy(product, organizationService.getAccessPolicyForOperation(product.getOrganization(), Operation.UPDATE))) {
 				return productService.updateProduct(productId, values);
 			}
